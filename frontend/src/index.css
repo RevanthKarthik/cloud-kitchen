@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Background */
+body {
+  @apply bg-gradient-to-br from-black via-gray-900 to-black text-white;
+  font-family: 'Inter', sans-serif;
+}
+body {
+  @apply bg-gradient-to-br from-black via-gray-900 to-black text-white;
+}
+
+/* Add depth */
+.main-bg {
+  background: radial-gradient(circle at center, #111827, #000000);
+}
+/* Glass effect */
+.glass {
+  @apply bg-white/10 backdrop-blur-xl border border-white/20;
+}
+.page {
+  @apply mt-6;
+}
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  padding: 10px;
+  border-radius: 10px;
+  transition: 0.3s;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 15px rgba(255, 75, 43, 0.7);
+}
+/* Card hover */
+.card-hover {
+  @apply transition transform hover:scale-105 hover:shadow-xl;
+}
