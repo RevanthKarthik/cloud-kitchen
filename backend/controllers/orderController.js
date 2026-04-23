@@ -1,4 +1,4 @@
-import Order from "../models/order.js";
+import Order from "../models/Order.js";
 import Food from "../models/Food.js";
 import { io } from "../server.js";
 
