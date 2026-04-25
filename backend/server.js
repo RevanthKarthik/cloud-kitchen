@@ -16,28 +16,22 @@ connectDB();
 
 const app = express();
 
-<<<<<<< HEAD
-// ✅ FIX PATH (IMPORTANT FOR RENDER)
+// ✅ FIX __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ✅ CORS (allow both local + deployed frontend)
+// ✅ CORS (clean version)
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://your-frontend.vercel.app" // 🔥 replace this later
-  ],
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
-// ✅ PARSERS
-=======
->>>>>>> 336d03f (add uploads folder to repo)
+// ✅ BODY PARSERS
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ 🔥 FIX CORB (VERY IMPORTANT)
+// ✅ FIX CORB (for images)
 app.use((req, res, next) => {
   res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
   next();
@@ -48,7 +42,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/food", foodRoutes);
 app.use("/api/orders", orderRoutes);
 
-// ✅ 🔥 STATIC FILES (CORRECT WAY)
+// ✅ STATIC FILES (uploads)
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // ✅ TEST ROUTE
@@ -60,9 +54,6 @@ app.get("/", (req, res) => {
 const server = app.listen(process.env.PORT || 5000, () =>
   console.log(`Server running on port ${process.env.PORT}`)
 );
-app.use(cors({
-  origin: "*"
-}));
 
 // ✅ SOCKET.IO
 export const io = new Server(server, {
