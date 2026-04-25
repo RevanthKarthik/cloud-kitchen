@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import Menu from "./pages/Menu";
-import Cart from "./pages/Cart";
+import Menu from "./pages/menu";
+import Cart from "./pages/cart";
 import Orders from "./pages/orders";
-import Login from "./pages/Login";
+import Login from "./pages/login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
