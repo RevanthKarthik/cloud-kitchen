@@ -1,7 +1,6 @@
 
 import express from "express";
 import dotenv from "dotenv";
-import cors from "cors";
 import connectDB from "./config/db.js";
 
 import authRoutes from "./routes/authRoutes.js";
@@ -9,13 +8,17 @@ import foodRoutes from "./routes/foodRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 
 import { Server } from "socket.io"; // ✅ ADD
-
+const cors = require("cors");
 dotenv.config();
 connectDB();
 
 const app = express();
 app.use(cors({
-  origin: "*"
+  origin: [
+    "http://localhost:5173" // 👈 replace after deploy
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
