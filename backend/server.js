@@ -2,13 +2,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-
+import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import foodRoutes from "./routes/foodRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 
 import { Server } from "socket.io"; // ✅ ADD
-const cors = require("cors");
 dotenv.config();
 connectDB();
 
