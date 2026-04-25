@@ -8,7 +8,7 @@ import Login from "./pages/login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/protectedRoute";
 import AdminRoute from "./components/AdminRoute";
 import Layout from "./components/Layout";
 import { useContext } from "react";
