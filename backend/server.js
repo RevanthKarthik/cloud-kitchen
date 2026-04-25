@@ -16,6 +16,7 @@ connectDB();
 
 const app = express();
 
+<<<<<<< HEAD
 // ✅ FIX PATH (IMPORTANT FOR RENDER)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,6 +32,8 @@ app.use(cors({
 }));
 
 // ✅ PARSERS
+=======
+>>>>>>> 336d03f (add uploads folder to repo)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -57,6 +60,9 @@ app.get("/", (req, res) => {
 const server = app.listen(process.env.PORT || 5000, () =>
   console.log(`Server running on port ${process.env.PORT}`)
 );
+app.use(cors({
+  origin: "*"
+}));
 
 // ✅ SOCKET.IO
 export const io = new Server(server, {

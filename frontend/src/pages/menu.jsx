@@ -5,7 +5,8 @@ import { CartContext } from "../context/CartContext";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-
+import { BASE } from "../config";
+import { API } from "../config";
 export default function Menu() {
   const [foods, setFoods] = useState([]);
   const [search, setSearch] = useState("");
@@ -97,7 +98,7 @@ export default function Menu() {
               <div className="relative">
                 <img
   id={`img-${food._id}`}   // ✅ SAFE
-  src={`http://localhost:5000${food.image}`}
+  src={`${BASE}${food.image}`}
   className="h-56 w-full object-cover rounded-lg"
 />
                 

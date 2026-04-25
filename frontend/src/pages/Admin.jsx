@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-
+import { BASE } from "../config";
 import { io } from "socket.io-client";
 import toast from "react-hot-toast";
+import { API } from "../config";
 import { useRef } from "react";
 export default function Admin() {
   const [foods, setFoods] = useState([]);
@@ -25,8 +26,7 @@ export default function Admin() {
   const audioRef = useRef(null);
   // ✅ FETCH FOODS
   const fetchFoods = () => {
-    axios
-      .get("http://localhost:5000/api/food")
+    axios.get(`${API}/food`)
       .then((res) => setFoods(res.data))
       .catch(() => toast.error("Failed to load foods ❌"));
   };
@@ -43,14 +43,15 @@ export default function Admin() {
   }, [preview]);
 
   useEffect(() => {
-  axios.get("http://localhost:5000/api/orders/all", {
+  
+axios.get(`${API}/orders/all`, {
     headers: {
       Authorization: `Bearer ${user.token}`,
     },
   }).then(res => setOrders(res.data));
 }, []);
   useEffect(() => {
-  const socket = io("http://localhost:5000");
+  const socket = io(BASE);
 
   socket.on("newOrder", (order) => {
     toast.success("🔥 New Order Received!");
@@ -82,7 +83,7 @@ export default function Admin() {
 
       formData.append("image", imageFile);
 
-      await axios.post("http://localhost:5000/api/food", formData, {
+      await axios.post(`${API}/food`, formData, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -114,7 +115,7 @@ export default function Admin() {
       }
 
       await axios.put(
-        `http://localhost:5000/api/food/${editingId}`,
+        `${API}/food/${editingId}`,
         formData,
         {
           headers: {
@@ -137,7 +138,7 @@ export default function Admin() {
   // ✅ DELETE FOOD
   const deleteFood = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/food/${id}`, {
+      await axios.delete(`${API}/food/${id}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
 
@@ -153,7 +154,7 @@ export default function Admin() {
   const handleEdit = (food) => {
     setEditingId(food._id);
     setForm(food);
-    setPreview(`http://localhost:5000${food.image}`);
+setPreview(`${BASE}${food.image}`)
   };
 
   // ✅ RESET FORM
@@ -273,7 +274,7 @@ export default function Admin() {
         >
           <div className="flex gap-4 items-center">
             <img
-              src={`http://localhost:5000${food.image}`}
+              src={`${BASE}${food.image}`}
               alt={food.name}
               className="h-16 w-16 object-cover rounded transition-transform duration-300 hover:scale-110"
             />

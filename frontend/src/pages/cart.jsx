@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import axios from "axios";
-
+import { BASE } from "../config";
+import { API } from "../config";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 function Cart() {
@@ -15,8 +16,7 @@ function Cart() {
 
 const checkout = async () => {
   try {
-    await axios.post(
-      "http://localhost:5000/api/orders",
+    await axios.post(`${API}/orders`, 
       {
         items: cart,
         total,
@@ -56,7 +56,7 @@ const checkout = async () => {
             >
               <div className="flex gap-4 items-center">
                 <img
-                  src={`http://localhost:5000${item.image}`}
+                  src={`${BASE}${item.image}`}
                   className="h-20 w-20 rounded object-cover"
                 />
 

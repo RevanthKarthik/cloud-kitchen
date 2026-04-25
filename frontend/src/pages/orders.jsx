@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import { BASE } from "../config";
+import { API } from "../config";
 export default function Orders() {
   const [orders, setOrders] = useState([]);
 
   const user = JSON.parse(localStorage.getItem("user"));
 
   const fetchOrders = () => {
-    axios.get("http://localhost:5000/api/orders/all", {
+    axios.get(`${API}/orders/all`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
@@ -37,8 +38,7 @@ export default function Orders() {
 
   const updateStatus = async (id, status) => {
   try {
-    await axios.put(
-      `http://localhost:5000/api/orders/${id}`,
+    await axios.put(`${API}/orders/${id}`, 
       { status },
       {
         headers: {
@@ -86,7 +86,7 @@ export default function Orders() {
           {order.items.map((item, i) => (
             <div key={i} className="flex gap-3 mb-2">
               <img
-                src={`http://localhost:5000${item.image}`}
+src={`${BASE}${item.image}`}
                 className="h-12 w-12 rounded"
               />
               <p>{item.name} x {item.qty}</p>

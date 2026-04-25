@@ -7,19 +7,19 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setUser } = useContext(AuthContext);
-
   const submit = async () => {
     try {
       const { data } = await axios.post("/auth/login", {
         email,
         password
       });
-
+      console.log(import.meta.env.VITE_API_URL);
       localStorage.setItem("user", JSON.stringify(data));
       setUser(data);
 
       window.location.href = "/menu";
     } catch (err) {
+    console.error("LOGIN ERROR:", err);
       alert("Login failed");
     }
   };
@@ -33,14 +33,13 @@ export default function Login() {
         className="block mb-2 p-2 text-black"
         onChange={(e) => setEmail(e.target.value)}
       />
-
       <input
         type="password"
         placeholder="Password"
         className="block mb-2 p-2 text-black"
         onChange={(e) => setPassword(e.target.value)}
       />
-
+       
       <button onClick={submit} className="btn-primary">
         Login
       </button>

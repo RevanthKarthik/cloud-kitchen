@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { BASE } from "../config";
+import { API } from "../config";
 export default function Dashboard() {
   const [orders, setOrders] = useState([]);
 
@@ -8,8 +9,7 @@ export default function Dashboard() {
 
   // 🔥 FETCH USER ORDERS (ONLY LOGGED USER)
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/orders/my", {
+    axios.get(`${API}/orders/my`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -96,7 +96,7 @@ export default function Dashboard() {
             className="flex items-center gap-3 bg-white/5 p-2 rounded"
           >
             <img
-              src={`http://localhost:5000${item.image}`}
+              src={`${BASE}${item.image}`}
               className="h-14 w-14 rounded object-cover"
             />
 
