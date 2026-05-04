@@ -20,7 +20,7 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ✅ CORS (clean version)
+// ✅ CORS
 app.use(cors({
   origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
@@ -42,7 +42,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/food", foodRoutes);
 app.use("/api/orders", orderRoutes);
 
-// ✅ STATIC FILES (uploads)
+// ✅ STATIC FILES
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // ✅ TEST ROUTE
@@ -50,14 +50,26 @@ app.get("/", (req, res) => {
   res.send("API Running");
 });
 
-// ✅ SERVER
+// ✅ START SERVER
 const server = app.listen(process.env.PORT || 5000, () =>
   console.log(`Server running on port ${process.env.PORT}`)
 );
 
-// ✅ SOCKET.IO
-export const io = new Server(server, {
+// ✅ SOCKET.IO SETUP
+const io = new Server(server, {
   cors: {
     origin: "*",
   },
+});
+
+// 🔥 IMPORTANT LINE (THIS FIXES EVERYTHING)
+app.set("io", io);
+
+// ✅ OPTIONAL: CONNECTION LOG
+io.on("connection", (socket) => {
+  console.log("🟢 Admin/User connected:", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("🔴 Disconnected:", socket.id);
+  });
 });
