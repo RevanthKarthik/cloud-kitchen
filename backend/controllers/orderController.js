@@ -25,6 +25,7 @@ export const createOrder = async (req, res) => {
 
     // 🔥 SOCKET FIX (CORRECT WAY)
     const io = req.app.get("io");
+    console.log("🔥 EMITTING NEW ORDER");
     io.emit("newOrder", order);
 
     res.json(order);
